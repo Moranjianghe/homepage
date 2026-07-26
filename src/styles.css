@@ -171,13 +171,31 @@ select:focus-visible {
   text-align: left;
 }
 
-.select-caret {
-  width: 7px;
-  height: 7px;
-  margin-left: 10px;
-  border-right: 1px solid var(--muted);
-  border-bottom: 1px solid var(--muted);
-  transform: rotate(45deg) translateY(-2px);
+.lucide-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.control-caret {
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  color: var(--muted);
+  stroke-width: 1.7;
+}
+
+.control-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 7px;
+  color: var(--muted);
+  stroke-width: 1.7;
 }
 
 .language-menu {
@@ -223,14 +241,10 @@ select:focus-visible {
 
 .theme-select {
   min-height: 40px;
-  padding: 0 28px 0 34px;
+  padding: 0 28px 0 10px;
   border: 1px solid var(--line);
   border-radius: 3px;
   background-color: var(--bg);
-  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
-  background-position: calc(100% - 13px) 17px, calc(100% - 9px) 17px;
-  background-repeat: no-repeat;
-  background-size: 4px 4px, 4px 4px;
   color: var(--text);
   cursor: pointer;
   font: inherit;
@@ -238,20 +252,15 @@ select:focus-visible {
   appearance: none;
 }
 
-.theme-select {
-  padding-left: 10px;
-}
-
-.link-arrow {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
 .link-arrow {
   color: var(--accent);
-  font-size: 18px;
-  line-height: 1;
+  transition: transform 180ms ease;
+}
+
+.link-arrow .lucide-icon {
+  width: 17px;
+  height: 17px;
+  stroke-width: 1.8;
 }
 
 .hero {
@@ -303,10 +312,6 @@ h1 {
   color: var(--accent);
   font-size: 14px;
   font-weight: 700;
-}
-
-.link-arrow {
-  transition: transform 180ms ease;
 }
 
 .hero-link:hover .link-arrow {
