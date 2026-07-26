@@ -1,0 +1,10 @@
+{
+  "name": "moranxia-homepage",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "python3 -m http.server ${PORT:-4173}",
+    "serve": "python3 -m http.server ${PORT:-4173}",
+    "test": "node --check src/main.js"
+  }
+}
