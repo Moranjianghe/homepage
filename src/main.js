@@ -4,11 +4,13 @@ const languageTrigger = document.querySelector('.language-trigger');
 const languageMenu = document.querySelector('.language-menu');
 const languageCurrent = document.querySelector('.language-current');
 const languageFlag = document.querySelector('.language-flag');
+const themeControl = document.querySelector('.theme-control');
 const languageOptions = [...document.querySelectorAll('.language-option')];
 const themeColor = document.querySelector('meta[name="theme-color"]');
 const supportedLanguages = ['en', 'zh-TW', 'zh-CN'];
 const supportedThemes = ['system', 'light', 'dark'];
 const languageFlags = { en: 'us', 'zh-TW': 'tw', 'zh-CN': 'cn' };
+const languageLabels = { en: 'English', 'zh-TW': '繁體中文', 'zh-CN': '简体中文' };
 const systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
 const translations = {
@@ -27,7 +29,8 @@ const translations = {
     sections: {
       aboutLabel: 'ABOUT',
       aboutTitle: 'About me',
-      aboutText: 'This is where my introduction should be. It is not written yet.',
+      aboutIntro: 'This is where my introduction should be.',
+      aboutPending: 'It is not written yet.',
       linksLabel: 'LINKS',
       linksTitle: 'Find me online',
     },
@@ -47,7 +50,8 @@ const translations = {
     sections: {
       aboutLabel: 'ABOUT',
       aboutTitle: '自我介紹',
-      aboutText: '這裡是我的自我介紹。還沒寫呢',
+      aboutIntro: '這裡是我的自我介紹。',
+      aboutPending: '還沒寫呢',
       linksLabel: 'LINKS',
       linksTitle: '找到我',
     },
@@ -67,7 +71,8 @@ const translations = {
     sections: {
       aboutLabel: 'ABOUT',
       aboutTitle: '自我介绍',
-      aboutText: '这里是我的自我介绍。还没写呢',
+      aboutIntro: '这里是我的自我介绍。',
+      aboutPending: '还没写呢',
       linksLabel: 'LINKS',
       linksTitle: '找到我',
     },
@@ -119,12 +124,12 @@ function setLanguage(mode, { persist = false } = {}) {
   const languageMode = mode === 'system' || supportedLanguages.includes(mode) ? mode : 'system';
   const language = languageMode === 'system' ? detectBrowserLanguage() : languageMode;
   const copy = translations[language] || translations.en;
-  languageCurrent.textContent = copy.language[languageMode];
+  languageCurrent.textContent = languageMode === 'system' ? copy.language.system : languageLabels[languageMode];
   languageFlag.src = `/icons/flags/${languageFlags[language]}.svg`;
   languageOptions.forEach((option) => {
     const optionMode = option.dataset.languageMode;
     option.setAttribute('aria-selected', String(optionMode === languageMode));
-    option.querySelector('[data-language-label]').textContent = copy.language[optionMode];
+    option.querySelector('[data-language-label]').textContent = optionMode === 'system' ? copy.language.system : languageLabels[optionMode];
     if (optionMode === 'system') {
       option.querySelector('img').src = `/icons/flags/${languageFlags[language]}.svg`;
     }
@@ -144,7 +149,10 @@ function setLanguage(mode, { persist = false } = {}) {
   });
   document.querySelector('.top-nav').setAttribute('aria-label', copy.nav.label);
   languageTrigger.setAttribute('aria-label', copy.language.label);
+  languageTrigger.title = copy.language.label;
   themeSelect.setAttribute('aria-label', copy.theme.label);
+  themeSelect.title = copy.theme.label;
+  themeControl.title = copy.theme.label;
   if (persist) localStorage.setItem('language', languageMode);
 }
 

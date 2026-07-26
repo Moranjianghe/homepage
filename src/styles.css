@@ -113,9 +113,16 @@ select:focus-visible {
   place-items: center;
   border: 1px solid var(--text);
   color: var(--text);
-  font-family: system-ui, sans-serif;
-  font-size: 17px;
-  font-weight: 400;
+}
+
+.brand-mark-icon {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
 }
 
 .top-nav {
@@ -136,16 +143,15 @@ select:focus-visible {
 .theme-control {
   position: relative;
   display: inline-flex;
+  width: 44px;
+  height: 44px;
   align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
 }
 
 .language-flag {
-  width: 18px;
-  height: 14px;
-  margin-right: 8px;
-  border-radius: 1px;
-  object-fit: cover;
-  line-height: 1;
+  display: none;
 }
 
 .language-trigger,
@@ -163,12 +169,10 @@ select:focus-visible {
 }
 
 .language-trigger {
-  padding: 0 10px;
-}
-
-.language-current {
-  min-width: 54px;
-  text-align: left;
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+  padding: 0;
 }
 
 .lucide-icon {
@@ -182,20 +186,12 @@ select:focus-visible {
   stroke-width: 1.8;
 }
 
-.control-caret {
-  width: 16px;
-  height: 16px;
-  margin-left: 8px;
-  color: var(--muted);
-  stroke-width: 1.7;
-}
-
 .control-icon {
   width: 16px;
   height: 16px;
-  margin-right: 7px;
   color: var(--muted);
   stroke-width: 1.7;
+  pointer-events: none;
 }
 
 .language-menu {
@@ -240,16 +236,25 @@ select:focus-visible {
 }
 
 .theme-select {
-  min-height: 40px;
-  padding: 0 28px 0 10px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
   border: 1px solid var(--line);
   border-radius: 3px;
   background-color: var(--bg);
   color: var(--text);
   cursor: pointer;
   font: inherit;
-  font-size: 12px;
+  font-size: 0;
+  text-indent: -9999px;
   appearance: none;
+}
+
+.theme-select option {
+  color: var(--text);
+  font-size: 13px;
+  text-indent: 0;
 }
 
 .link-arrow {
@@ -461,10 +466,19 @@ h2 {
 
   .site-header {
     min-height: 76px;
+    gap: 12px;
+  }
+
+  .brand {
+    gap: 0;
+  }
+
+  .brand > span:last-child {
+    display: none;
   }
 
   .top-nav {
-    gap: 10px;
+    gap: 8px;
   }
 
   .top-nav a {
@@ -473,7 +487,7 @@ h2 {
 
   .language-trigger,
   .theme-select {
-    min-height: 40px;
+    min-height: 44px;
   }
 
   .hero {
