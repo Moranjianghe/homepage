@@ -18,6 +18,7 @@
     </script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content" data-i18n="nav.skip">Skip to content</a>
     <header class="site-header">
       <a class="brand" href="/" aria-label="Home">
         <span class="brand-mark" aria-hidden="true">
@@ -95,7 +96,7 @@
       </nav>
     </header>
 
-    <main>
+    <main id="main-content">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="eyebrow" data-i18n="hero.eyebrow">PERSONAL HOMEPAGE</p>
@@ -112,13 +113,15 @@
         </div>
         <div class="hero-portrait" aria-label="Moran Jianghe's portrait" data-i18n-aria-label="avatarLabel">
           <div class="portrait-frame">
-            <img src="/images/profile.webp" width="768" height="768" alt="Moran Jianghe's portrait" data-i18n-alt="avatarAlt" />
+            <div class="portrait-media">
+              <img src="/images/profile.webp" width="768" height="768" alt="Moran Jianghe's portrait" data-i18n-alt="avatarAlt" />
+            </div>
           </div>
           <p class="portrait-note">M / 01</p>
         </div>
       </section>
 
-      <section class="content-section about-section" id="about" aria-labelledby="about-title">
+      <section class="content-section about-section" id="about" aria-labelledby="about-title" data-reveal>
         <div class="section-label"><span>01</span><span data-i18n="sections.aboutLabel">ABOUT</span></div>
         <div class="section-content">
           <h2 id="about-title" data-i18n="sections.aboutTitle">About me</h2>
@@ -126,12 +129,12 @@
         </div>
       </section>
 
-      <section class="content-section links-section" id="links" aria-labelledby="links-title">
+      <section class="content-section links-section" id="links" aria-labelledby="links-title" data-reveal>
         <div class="section-label"><span>02</span><span data-i18n="sections.linksLabel">LINKS</span></div>
         <div class="section-content">
           <h2 id="links-title" data-i18n="sections.linksTitle">Find me online</h2>
           <div class="link-list">
-            <a class="link-item" href="https://twitter.com/moranjianghe" target="_blank" rel="noreferrer">
+            <a class="link-item" href="https://twitter.com/moranjianghe" target="_blank" rel="noreferrer" data-reveal data-reveal-delay="0">
               <span class="link-identity"><svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/icons/simple/twitter.svg#twitter" /></svg><span>Twitter</span></span>
               <span class="link-arrow" aria-hidden="true">
                 <svg class="lucide-icon" viewBox="0 0 24 24" focusable="false">
@@ -140,7 +143,7 @@
                 </svg>
               </span>
             </a>
-            <a class="link-item" href="https://github.com/Moranjianghe" target="_blank" rel="noreferrer">
+            <a class="link-item" href="https://github.com/Moranjianghe" target="_blank" rel="noreferrer" data-reveal data-reveal-delay="45">
               <span class="link-identity"><svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/icons/simple/github.svg#github" /></svg><span>GitHub</span></span>
               <span class="link-arrow" aria-hidden="true">
                 <svg class="lucide-icon" viewBox="0 0 24 24" focusable="false">
@@ -149,7 +152,7 @@
                 </svg>
               </span>
             </a>
-            <a class="link-item" href="https://blog.moranxia.com/" target="_blank" rel="noreferrer">
+            <a class="link-item" href="https://blog.moranxia.com/" target="_blank" rel="noreferrer" data-reveal data-reveal-delay="90">
               <span class="link-identity"><svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/icons/simple/hexo.svg#hexo" /></svg><span>Blog</span></span>
               <span class="link-arrow" aria-hidden="true">
                 <svg class="lucide-icon" viewBox="0 0 24 24" focusable="false">
@@ -158,7 +161,7 @@
                 </svg>
               </span>
             </a>
-            <a class="link-item" href="https://t.me/ink_dyeing" target="_blank" rel="noreferrer">
+            <a class="link-item" href="https://t.me/ink_dyeing" target="_blank" rel="noreferrer" data-reveal data-reveal-delay="135">
               <span class="link-identity"><svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/icons/simple/telegram.svg#telegram" /></svg><span>Telegram</span></span>
               <span class="link-arrow" aria-hidden="true">
                 <svg class="lucide-icon" viewBox="0 0 24 24" focusable="false">

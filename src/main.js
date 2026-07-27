@@ -9,12 +9,13 @@ const supportedLanguages = ['en', 'zh-TW', 'zh-CN'];
 const supportedThemes = ['system', 'light', 'dark'];
 const languageLabels = { en: 'English', 'zh-TW': '繁體中文', 'zh-CN': '简体中文' };
 const systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 const translations = {
   en: {
     pageTitle: "Moran Jianghe · Personal Homepage",
     description: "Moran Jianghe's personal homepage",
-    nav: { label: 'Main navigation', about: 'About', links: 'Links' },
+    nav: { label: 'Main navigation', about: 'About', links: 'Links', skip: 'Skip to content' },
     language: { label: 'Language', system: 'System', en: 'English', 'zh-TW': 'Traditional Chinese', 'zh-CN': 'Simplified Chinese' },
     avatarLabel: "Moran Jianghe's portrait",
     avatarAlt: "Moran Jianghe's portrait",
@@ -35,7 +36,7 @@ const translations = {
   'zh-TW': {
     pageTitle: '墨染江河 · 個人主頁',
     description: '墨染江河的個人主頁',
-    nav: { label: '主導航', about: '關於', links: '連結' },
+    nav: { label: '主導航', about: '關於', links: '連結', skip: '跳至內容' },
     language: { label: '語言', system: '系統預設', en: 'English', 'zh-TW': '繁體中文', 'zh-CN': '簡體中文' },
     avatarLabel: '墨染江河的頭像',
     avatarAlt: '墨染江河的頭像',
@@ -56,7 +57,7 @@ const translations = {
   'zh-CN': {
     pageTitle: '墨染江河 · 个人主页',
     description: '墨染江河的个人主页',
-    nav: { label: '主导航', about: '关于', links: '链接' },
+    nav: { label: '主导航', about: '关于', links: '链接', skip: '跳转到内容' },
     language: { label: '语言', system: '系统默认', en: 'English', 'zh-TW': '繁体中文', 'zh-CN': '简体中文' },
     avatarLabel: '墨染江河的头像',
     avatarAlt: '墨染江河的头像',
@@ -209,8 +210,65 @@ systemThemeQuery.addEventListener('change', () => {
   if (root.dataset.themeMode === 'system') setTheme('system');
 });
 
+function setupScrollReveal() {
+  const revealElements = [...document.querySelectorAll('[data-reveal]')];
+
+  if (reducedMotionQuery.matches || !('IntersectionObserver' in window)) {
+    revealElements.forEach((element) => element.classList.add('is-visible'));
+    return;
+  }
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+  revealElements.forEach((element, index) => {
+    const delay = element.dataset.revealDelay ?? Math.min(index * 55, 220);
+    element.style.setProperty('--reveal-delay', `${delay}ms`);
+    revealObserver.observe(element);
+  });
+}
+
+function setupPortraitMotion() {
+  const portraitFrame = document.querySelector('.portrait-frame');
+  const pointerQuery = window.matchMedia('(min-width: 761px) and (hover: hover) and (pointer: fine)');
+  if (!portraitFrame || reducedMotionQuery.matches || !pointerQuery.matches) return;
+
+  let frameRequest = 0;
+  let pointerPosition;
+
+  const renderTilt = () => {
+    frameRequest = 0;
+    if (!pointerPosition) return;
+    portraitFrame.style.setProperty('--tilt-x', `${pointerPosition.y}deg`);
+    portraitFrame.style.setProperty('--tilt-y', `${pointerPosition.x}deg`);
+  };
+
+  portraitFrame.addEventListener('pointermove', (event) => {
+    const bounds = portraitFrame.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 3.2;
+    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * -3.2;
+    pointerPosition = { x: x.toFixed(2), y: y.toFixed(2) };
+    portraitFrame.classList.add('is-pointer-active');
+    if (!frameRequest) frameRequest = requestAnimationFrame(renderTilt);
+  });
+
+  portraitFrame.addEventListener('pointerleave', () => {
+    pointerPosition = { x: 0, y: 0 };
+    portraitFrame.classList.remove('is-pointer-active');
+    if (!frameRequest) frameRequest = requestAnimationFrame(renderTilt);
+  });
+}
+
 document.querySelector('#year').textContent = new Date().getFullYear();
 const savedTheme = localStorage.getItem('theme');
 const savedLanguage = localStorage.getItem('language');
 setTheme(supportedThemes.includes(savedTheme) ? savedTheme : 'system');
 setLanguage(savedLanguage === 'system' || supportedLanguages.includes(savedLanguage) ? savedLanguage : 'system');
+root.dataset.motionReady = 'true';
+setupScrollReveal();
+setupPortraitMotion();
