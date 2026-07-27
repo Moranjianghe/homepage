@@ -33,7 +33,6 @@
         <div class="language-control">
           <span class="sr-only" data-i18n="language.label">Language</span>
           <button class="language-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="language-menu" aria-label="Language" title="Language">
-            <img class="language-flag" src="/icons/flags/us.svg" width="18" height="14" alt="" />
             <span class="language-current sr-only">System</span>
             <svg class="lucide-icon control-icon language-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="m5 8 6 6" />
@@ -46,7 +45,11 @@
           </button>
           <div class="language-menu" id="language-menu" role="listbox" hidden>
             <button class="language-option" type="button" role="option" data-language-mode="system" aria-selected="true">
-              <img class="language-option-flag" src="/icons/flags/us.svg" width="18" height="14" alt="" />
+              <svg class="lucide-icon language-system-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect width="20" height="14" x="2" y="3" rx="2" />
+                <line x1="8" x2="16" y1="21" y2="21" />
+                <line x1="12" x2="12" y1="17" y2="21" />
+              </svg>
               <span data-language-label="system">System</span>
             </button>
             <button class="language-option" type="button" role="option" data-language-mode="en" aria-selected="false">
@@ -63,25 +66,32 @@
             </button>
           </div>
         </div>
-        <label class="theme-control">
+        <div class="theme-control">
           <span class="sr-only" data-i18n="theme.label">Theme</span>
-          <svg class="lucide-icon control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2" />
-            <path d="M12 20v2" />
-            <path d="m4.93 4.93 1.41 1.41" />
-            <path d="m17.66 17.66 1.41 1.41" />
-            <path d="M2 12h2" />
-            <path d="M20 12h2" />
-            <path d="m6.34 17.66-1.41 1.41" />
-            <path d="m19.07 4.93-1.41 1.41" />
-          </svg>
-          <select class="theme-select" aria-label="Theme" title="Theme">
-            <option value="system" data-i18n="theme.system">System</option>
-            <option value="light" data-i18n="theme.lightOption">Light</option>
-            <option value="dark" data-i18n="theme.darkOption">Dark</option>
-          </select>
-        </label>
+          <button class="theme-toggle" type="button" aria-label="Theme: System" title="Theme: System" data-theme-mode="system">
+            <svg class="lucide-icon theme-icon" viewBox="0 0 24 24" data-theme-icon="system" aria-hidden="true" focusable="false">
+              <path d="M12 2v2" />
+              <path d="M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715" />
+              <path d="M16 12a4 4 0 0 0-4-4" />
+              <path d="m19 5-1.256 1.256" />
+              <path d="M20 12h2" />
+            </svg>
+            <svg class="lucide-icon theme-icon" viewBox="0 0 24 24" data-theme-icon="light" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+            <svg class="lucide-icon theme-icon" viewBox="0 0 24 24" data-theme-icon="dark" aria-hidden="true" focusable="false">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+        </div>
       </nav>
     </header>
 
